@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import time
 import random
 import argparse
 import leo
@@ -18,7 +19,11 @@ def main(argv=None):
     for word in words:
         print(word, end='')
         input()
-        leo.pronounce(word, 'ende')
+        subs = [sub.strip() for sub in word.split('/')]
+        leo.pronounce(subs[0], 'ende')
+        for sub in subs[1:]:
+            time.sleep(0.5)
+            leo.pronounce(sub, 'ende')
     
     return 0
 
