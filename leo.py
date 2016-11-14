@@ -33,6 +33,7 @@ def pronounce(phrase, lang):
             url = side.find('pron')['url']
             result.append((word, url))
     if not result: return False
+    result = [x for x in result if phrase in x[0]]
     result.sort(key=lambda x: similarity(x[0], phrase), reverse=True)
     pid = result[0][1]
     url = URL_PRONOUNCE % {'id': pid}
