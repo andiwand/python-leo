@@ -9,8 +9,11 @@ import leo
 def main(argv=None):
     parser = argparse.ArgumentParser(description='pronunciation training')
     parser.add_argument('-s', '--sequential', help='sequential order', action='store_true')
+    parser.add_argument('-p', '--pronounce', help='pronounce word', action='store_true')
     parser.add_argument('file', help='word list')
     args = parser.parse_args(argv)
+    
+    lang = 'ende'
     
     with open(args.file, 'r') as f:
         words = [line.strip() for line in f.readlines() if line.strip()]
@@ -19,11 +22,21 @@ def main(argv=None):
     for word in words:
         print(word, end='')
         input()
+        
         subs = [sub.strip() for sub in word.split('/')]
-        leo.pronounce(subs[0], 'ende')
-        for sub in subs[1:]:
-            time.sleep(0.5)
-            leo.pronounce(sub, 'ende')
+        for sub in subs:
+            if len(subs) > 1: print("%s:" % sub)
+            translations = leo.translate(sub, lang)
+            if not translations:
+                print("\tnot found")
+            else:
+                for translation in translations:
+                    print("\t%s - %s" % translation)
+        if args.pronounce:
+            leo.pronounce(subs[0], lang)
+            for sub in subs[1:]:
+                time.sleep(0.3)
+                leo.pronounce(sub, lang)
     
     return 0
 
