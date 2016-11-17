@@ -54,6 +54,7 @@ def play(url):
     player.play()
     while player.get_state() not in (vlc.State.Stopped, vlc.State.Ended, vlc.State.Error):
         time.sleep(0.1)
+    player.stop()
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description='leo dict cli')
