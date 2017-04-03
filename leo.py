@@ -9,14 +9,24 @@ import requests
 from bs4 import BeautifulSoup
 
 
-COUNTRY_CODES = {'de', 'en', 'fr', 'es'}
-LANGUAGES = {'fr': 'French', 'de': 'German', 'es': 'Spanish', 'en': 'English'}
+COUNTRY_CODES = {
+    'en',
+    'de',
+    'fr',
+    'es',
+}
+LANGUAGES = {
+    'en': 'English',
+    'de': 'German',
+    'fr': 'French',
+    'es': 'Spanish',
+}
 
-URL = "http://dict.leo.org/dictQuery/m-vocab/%(lang)s/query.xml" \
-      "?tolerMode=nof&lp=%(lang)s&lang=de&rmWords=off&rmSearch=on" \
-      "&search=%(word)s&searchLoc=0&resultOrder=basic" \
+URL = "http://dict.leo.org/dictQuery/m-vocab/{0}/query.xml" \
+      "?tolerMode=nof&lp={0}&lang=de&rmWords=off&rmSearch=on" \
+      "&search={1}&searchLoc=0&resultOrder=basic" \
       "&multiwordShowSingle=on"
-URL_PRONOUNCE = 'http://dict.leo.org/media/audio/%(id)s.mp3'
+URL_PRONOUNCE = 'http://dict.leo.org/media/audio/{0}.mp3'
 
 
 def similarity(s1, s2):
@@ -24,7 +34,7 @@ def similarity(s1, s2):
 
 
 def fetch(phrase, lang):
-    url = URL % {'lang': lang, 'word': phrase}
+    url = URL.format(lang, phrase)
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'xml')
     return soup.find_all('entry')
@@ -47,7 +57,7 @@ def pronounce(phrase, lang):
     result = [x for x in result if phrase in x[0]]
     result.sort(key=lambda x: similarity(x[0], phrase), reverse=True)
     pid = result[0][1]
-    url = URL_PRONOUNCE % {'id': pid}
+    url = URL_PRONOUNCE.format(pid)
     play(url)
     return True
 
