@@ -73,16 +73,19 @@ def translate(phrase, lang):
 
 
 def play(url):
-    import vlc
-    player = vlc.MediaPlayer(url)
-    player.play()
-    while player.get_state() not in (
-            vlc.State.Stopped,
-            vlc.State.Ended,
-            vlc.State.Error,
-    ):
-        time.sleep(0.1)
-    player.stop()
+    try:
+        import vlc
+        player = vlc.MediaPlayer(url)
+        player.play()
+        while player.get_state() not in (
+                vlc.State.Stopped,
+                vlc.State.Ended,
+                vlc.State.Error,
+        ):
+            time.sleep(0.1)
+        player.stop()
+    except ImportError:
+        print("Python library vlc not found", file=sys.stderr)
 
 
 def main(argv=None):
