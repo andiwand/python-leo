@@ -24,6 +24,7 @@ setup(
         'beautifulsoup4',
         'requests',
         'python-vlc',
+        'lxml',
     ],
     extras_require={
     },
