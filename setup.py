@@ -29,7 +29,7 @@ setup(
     },
     entry_points="""
     [console_scripts]
-    leo=leo:main
-    train=train:main
+    leo=leo.leo:main
+    train=leo.train:main
     """
 )
