@@ -23,7 +23,6 @@ setup(
     install_requires=[
         'beautifulsoup4',
         'requests',
-        'python-vlc',
         'lxml',
     ],
     extras_require={
