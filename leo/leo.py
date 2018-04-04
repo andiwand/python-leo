@@ -85,7 +85,7 @@ def play(url):
             time.sleep(0.1)
         player.stop()
     except ImportError:
-        print("Python library vlc not found", file=sys.stderr)
+        sys.stderr.write("Python library vlc not found")
 
 
 def main(argv=None):

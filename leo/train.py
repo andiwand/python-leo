@@ -35,7 +35,7 @@ def main(argv=None):
         random.shuffle(words)
 
     for word in words:
-        print(word)
+        sys.stdout.write(word)
         input()
 
         subs = [sub.strip() for sub in word.split('/')]
