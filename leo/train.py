@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -35,7 +35,7 @@ def main(argv=None):
         random.shuffle(words)
 
     for word in words:
-        print(word, end='')
+        print(word)
         input()
 
         subs = [sub.strip() for sub in word.split('/')]
