@@ -1,3 +1,4 @@
 beautifulsoup4>=4.3.0
 requests>=1.2.3
-lxml
+lxml>=4.2.4
+pre-commit>=1.10.5

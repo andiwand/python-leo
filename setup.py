@@ -1,5 +1,4 @@
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 setup(
     name='leo',
@@ -22,9 +21,9 @@ setup(
     license='GPLv3',
     packages=find_packages(),
     install_requires=[
-        'beautifulsoup4',
-        'requests',
-        'lxml',
+        'beautifulsoup4>=4.3.0',
+        'requests>=1.2.3',
+        'lxml>=4.2.4',
     ],
     extras_require={
     },

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import argparse
+import random
 import sys
 import time
-import random
-import argparse
+
 import leo
 
 

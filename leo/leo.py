@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import argparse
+import difflib
 import sys
 import time
-import difflib
-import argparse
+
 import requests
 from bs4 import BeautifulSoup
-
 
 COUNTRY_CODES = {
     'en',
