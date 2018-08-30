@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='leo',
-    version='1.0',
+    version='1.1',
     description='dict.leo.org',
     long_description='Leo Dictionary',
     classifiers=[
