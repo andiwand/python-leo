@@ -23,7 +23,7 @@ setup(
     install_requires=[
         'beautifulsoup4>=4.3.0',
         'requests>=1.2.3',
-        'lxml>=4.2.4',
+        'lxml>=4.1.1',
     ],
     extras_require={
     },
