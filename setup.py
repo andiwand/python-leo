@@ -15,9 +15,9 @@ setup(
         'Programming Language :: Python :: 3.6'
     ],
     keywords='leo',
-    author='Tobias Rueetschi',
-    author_email='tr@brief.li',
-    url='https://github.com/keachi/pyleo',
+    author='Andreas Stefl',
+    author_email='stefl.andreas@gmail.com',
+    url='https://github.com/andiwand/pyleo',
     license='GPLv3',
     packages=find_packages(),
     install_requires=[
