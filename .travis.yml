@@ -1,0 +1,27 @@
+---
+language: python
+
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+cache:
+  pip: true
+
+before_install:
+  - python --version
+  - pip install -U pip
+
+install:
+  - pip install ".[test]" .
+
+script:
+  - pycodestyle .
+
+after_success:
+  - codecov
+
+# vim: set ts=2 sw=2 :

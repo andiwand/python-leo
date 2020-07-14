@@ -10,23 +10,25 @@ import requests
 from bs4 import BeautifulSoup
 
 COUNTRY_CODES = {
-    'en',
-    'de',
-    'fr',
-    'es',
+    "en",
+    "de",
+    "fr",
+    "es",
 }
 LANGUAGES = {
-    'en': 'English',
-    'de': 'German',
-    'fr': 'French',
-    'es': 'Spanish',
+    "en": "English",
+    "de": "German",
+    "fr": "French",
+    "es": "Spanish",
 }
 
-URL = "http://dict.leo.org/dictQuery/m-vocab/{0}/query.xml" \
-      "?tolerMode=nof&lp={0}&lang=de&rmWords=off&rmSearch=on" \
-      "&search={1}&searchLoc=0&resultOrder=basic" \
-      "&multiwordShowSingle=on"
-URL_PRONOUNCE = 'http://dict.leo.org/media/audio/{0}.mp3'
+URL = (
+    "http://dict.leo.org/dictQuery/m-vocab/{0}/query.xml"
+    "?tolerMode=nof&lp={0}&lang=de&rmWords=off&rmSearch=on"
+    "&search={1}&searchLoc=0&resultOrder=basic"
+    "&multiwordShowSingle=on"
+)
+URL_PRONOUNCE = "http://dict.leo.org/media/audio/{0}.mp3"
 
 
 def similarity(s1, s2):
@@ -36,8 +38,8 @@ def similarity(s1, s2):
 def fetch(phrase, lang):
     url = URL.format(lang, phrase)
     r = requests.get(url)
-    soup = BeautifulSoup(r.text, 'xml')
-    return soup.find_all('entry')
+    soup = BeautifulSoup(r.text, "xml")
+    return soup.find_all("entry")
 
 
 def pronounce(phrase, lang):
@@ -46,11 +48,11 @@ def pronounce(phrase, lang):
         return None
     result = []
     for entry in entries:
-        for side in entry.find_all('side', lang='en'):
-            word = side.find('word').get_text()
-            if not side.find('pron'):
+        for side in entry.find_all("side", lang="en"):
+            word = side.find("word").get_text()
+            if not side.find("pron"):
                 continue
-            url = side.find('pron')['url']
+            url = side.find("pron")["url"]
             result.append((word, url))
     if not result:
         return False
@@ -67,20 +69,24 @@ def translate(phrase, lang):
     if not entries:
         return None
 
-    return [tuple([side.find('word').get_text()
-                  for side in entry.find_all('side')])
-            for entry in entries]
+    return [
+        tuple([
+            side.find("word").get_text() for side in entry.find_all("side")
+        ])
+        for entry in entries
+    ]
 
 
 def play(url):
     try:
         import vlc
+
         player = vlc.MediaPlayer(url)
         player.play()
         while player.get_state() not in (
-                vlc.State.Stopped,
-                vlc.State.Ended,
-                vlc.State.Error,
+            vlc.State.Stopped,
+            vlc.State.Ended,
+            vlc.State.Error,
         ):
             time.sleep(0.1)
         player.stop()
@@ -90,24 +96,27 @@ def play(url):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description='leo dict cli',
+        description="leo dict cli",
     )
     parser.add_argument(
-        '-l',
-        '--language',
+        "-l",
+        "--language",
         help='destination language (default is "%(default)s")',
-        default='en',
+        default="en",
     )
     parser.add_argument(
-        '-p',
-        '--pronounce',
-        help='pronounce phrase',
-        action='store_true',
+        "-p",
+        "--pronounce",
+        help="pronounce phrase",
+        action="store_true",
     )
-    parser.add_argument('phrase', help='phrase to translate')
+    parser.add_argument(
+        "phrase",
+        help="phrase to translate",
+    )
     args = parser.parse_args(argv)
 
-    phrase, lang = args.phrase, args.language + 'de'
+    phrase, lang = args.phrase, args.language + "de"
 
     if args.pronounce:
         result = pronounce(phrase, lang)
@@ -115,16 +124,16 @@ def main(argv=None):
 
     translations = translate(phrase, lang)
     if not translations:
-        print('no translation found')
+        print("no translation found")
         return 1
 
     for trans in translations:
-        print('%s\t\t%s' % trans)
+        print("%s\t\t%s" % trans)
 
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     rcode = main()
     sys.exit(rcode)
 

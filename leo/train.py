@@ -11,26 +11,29 @@ import leo
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description='pronunciation training',
+        description="pronunciation training",
     )
     parser.add_argument(
-        '-s',
-        '--sequential',
-        help='sequential order',
-        action='store_true',
+        "-s",
+        "--sequential",
+        help="sequential order",
+        action="store_true",
     )
     parser.add_argument(
-        '-p',
-        '--pronounce',
-        help='pronounce word',
-        action='store_true',
+        "-p",
+        "--pronounce",
+        help="pronounce word",
+        action="store_true",
     )
-    parser.add_argument('file', help='word list')
+    parser.add_argument(
+        "file",
+        help="word list",
+    )
     args = parser.parse_args(argv)
 
-    lang = 'ende'
+    lang = "ende"
 
-    with open(args.file, 'r') as f:
+    with open(args.file, "r") as f:
         words = [line.strip() for line in f.readlines() if line.strip()]
     if not args.sequential:
         random.shuffle(words)
@@ -39,7 +42,7 @@ def main(argv=None):
         sys.stdout.write(word)
         input()
 
-        subs = [sub.strip() for sub in word.split('/')]
+        subs = [sub.strip() for sub in word.split("/")]
         for sub in subs:
             subs_len = len(subs)
             if subs_len > 1:
@@ -59,7 +62,7 @@ def main(argv=None):
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     exit = main()
     sys.exit(exit)
 
