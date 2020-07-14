@@ -19,7 +19,6 @@ setup(
     author="Andreas Stefl",
     author_email="stefl.andreas@gmail.com",
     url="https://github.com/andiwand/pyleo",
-    license="GPLv3",
     packages=find_packages(),
     install_requires=[
         "beautifulsoup4>=4.3.0",
